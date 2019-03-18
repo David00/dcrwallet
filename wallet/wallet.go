@@ -4102,15 +4102,16 @@ func (w *Wallet) SignTransaction(tx *wire.MsgTx, hashType txscript.SigHashType, 
 					})
 				}
 			}
+			for sigErr := range signErrors {
+				log.Infof("Sign error for input %d: %v", sigErr.InputIndex, sigErr.Error)
+			}
 		}
 		return nil
 	})
 	if err != nil {
 		return nil, errors.E(op, err)
 	}
-	for sigErr := range signErrors {
-		log.Infof("Sign error for input %d: %v", sigErr.InputIndex, sigErr.Error)
-	}
+
 	return signErrors, nil
 }
 
