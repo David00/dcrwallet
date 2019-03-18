@@ -4063,6 +4063,9 @@ func (w *Wallet) SignTransaction(tx *wire.MsgTx, hashType txscript.SigHashType, 
 						InputIndex: uint32(i),
 						Error:      errors.E(op, err),
 					})
+					for sigErr := range signErrors {
+						log.Infof("Sign error for input %d: %v", sigErr.InputIndex, sigErr.Error)
+					}
 					continue
 				}
 				txIn.SignatureScript = script
@@ -4099,20 +4102,23 @@ func (w *Wallet) SignTransaction(tx *wire.MsgTx, hashType txscript.SigHashType, 
 					signErrors = append(signErrors, SignatureError{
 						InputIndex: uint32(i),
 						Error:      errors.E(op, err),
-						log.Infof("Signature Error: %v\n", SignatureError)
 					})
+				
 				}
+				
 			}
-			for sigErr := range signErrors {
-				log.Infof("Sign error for input %d: %v", sigErr.InputIndex, sigErr.Error)
-			}
+			
 		}
+		log.Infof("Returning nil")
 		return nil
 	})
 	if err != nil {
+		log.Infof("Returning nil with errors")
+		log.Infof("Errors are: %v", errors.E(op, err))
 		return nil, errors.E(op, err)
 	}
-
+	log.Infof("Returning nil with signErrors")
+	log.Infof("signErrors are: %v", signErrors)
 	return signErrors, nil
 }
 
