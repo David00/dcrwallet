@@ -3934,6 +3934,8 @@ func (w *Wallet) SignTransaction(tx *wire.MsgTx, hashType txscript.SigHashType, 
 
 	const op errors.Op = "wallet.SignTransaction"
 
+	log.Infof("Signing Transaction %s", tx)
+
 	var doneFuncs []func()
 	defer func() {
 		for _, f := range doneFuncs {
