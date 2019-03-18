@@ -4514,6 +4514,7 @@ func Open(cfg *Config) (*Wallet, error) {
 		return nil, errors.E(op, err)
 	}
 	log.Infof("Opened wallet") // TODO: log balance? last sync height?
+	log.Infof("Started ticket splitting debugging logging using dcrwallet-v1.4.0-v5.exe")
 
 	var vb stake.VoteBits
 	err = walletdb.View(w.db, func(tx walletdb.ReadTx) error {
