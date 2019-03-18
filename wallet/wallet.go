@@ -4099,6 +4099,7 @@ func (w *Wallet) SignTransaction(tx *wire.MsgTx, hashType txscript.SigHashType, 
 					signErrors = append(signErrors, SignatureError{
 						InputIndex: uint32(i),
 						Error:      errors.E(op, err),
+						log.Infof("Signature Error: %v\n", SignatureError)
 					})
 				}
 			}
