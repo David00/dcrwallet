@@ -34,7 +34,7 @@ var PreRelease = "pre"
 // BuildMetadata defines additional build metadata.  It is modified at link time
 // for official releases.  It must only contain characters from the semantic
 // version alphabet.
-var BuildMetadata = "dev"
+var BuildMetadata = "dev.DavidA"
 
 // String returns the application version as a properly formed string per the
 // semantic versioning 2.0.0 spec (http://semver.org/).

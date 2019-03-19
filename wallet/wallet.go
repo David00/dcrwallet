@@ -4513,7 +4513,10 @@ func Open(cfg *Config) (*Wallet, error) {
 	if err != nil {
 		return nil, errors.E(op, err)
 	}
+	fmt.Println("Print statement before opened wallet")
 	log.Infof("Opened wallet") // TODO: log balance? last sync height?
+	fmt.Println("Print statement after opened wallet")
+
 	log.Infof("Started ticket splitting debugging logging using dcrwallet-v1.4.0-v5.exe")
 
 	var vb stake.VoteBits
